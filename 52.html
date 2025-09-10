@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+--glass-bg: rgba(255,255,255,0.02);
+--glass-border: rgba(255,255,255,0.08);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Montserrat,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial}
+
+
+body{
+display:flex;align-items:center;justify-content:center;
+background: linear-gradient(135deg,#000 0%, #111 50%, #000 100%);
+min-height:100vh;
+overflow:hidden;
+color:white;
+}
+
+
+.noise-bg{
+position:absolute;inset:0;z-index:0;
+background-image:url("https://www.transparenttextures.com/patterns/noise.png");
+opacity:0.08;
+}
+
+
+.card{
+position:relative;z-index:2;display:flex;align-items:center;justify-content:center;flex-direction:column;
+width:min(90%,1000px);height:min(50vh,420px);padding:32px;border-radius:12px;
+background: var(--glass-bg);
+border: 1px solid var(--glass-border);
+backdrop-filter: blur(4px) saturate(80%);
+box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+text-align:center;
+}
+
+
+h1{
+margin:0;font-weight:800;letter-spacing:2px;font-size: clamp(32px, 8vw, 72px);
+color:#e5e5e5;text-shadow: 0 4px 14px rgba(0,0,0,0.9);
+}
+
+
+.subtitle{
+margin-top:12px;color:rgba(200,200,200,0.6);font-weight:300;font-size:clamp(12px,2.5vw,18px);
+}
+
+
+.glow{
+position:absolute;left:50%;transform:translateX(-50%);bottom:20%;width:50%;height:20px;border-radius:999px;z-index:1;
+background: radial-gradient(closest-side, rgba(255,255,255,0.04), transparent 70%);
+filter: blur(18px);
+}
+
+
+.hint{position:absolute;bottom:12px;right:12px;color:rgba(255,255,255,0.3);font-size:12px;font-style:italic}
+
+
+@media (max-width:520px){
+.card{padding:20px;border-radius:10px}
+}
+</style>
+</head>
+<body>
+<div class="noise-bg" aria-hidden="true"></div>
+<div class="card" role="main">
+<div class="glow" aria-hidden="true"></div>
+<div>
+<h1>Борис Ремезовський</h1>
+</div>
+</body>
+</html>
