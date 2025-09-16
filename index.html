@@ -10,8 +10,8 @@
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      /* Чорний градієнтний фон сторінки */
-      background: linear-gradient(135deg, #0f0f0f, #1a1a1a, #2a2a2a);
+      /* Градієнтний темний фон */
+      background: linear-gradient(135deg, #0a1a2a, #122f4a, #164a7e);
       color: #222;
       line-height: 1.6;
       min-height: 100vh;
@@ -19,38 +19,72 @@
       flex-direction: column;
       align-items: center;
       padding: 40px 15px;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    /* Основний контейнер */
+    /* Фоновий пінгвін */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 250px;
+      height: 250px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/512px-Tux.svg.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      opacity: 0.07;
+      transform: translate(-50%, -50%) scale(1);
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      pointer-events: none;
+      z-index: 0;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.05));
+    }
+
+    body:hover::before {
+      transform: translate(-50%, -50%) scale(1.15);
+      opacity: 0.12;
+    }
+
     main {
-      background: #fff; /* Білий фон */
+      background: #fff;
       max-width: 900px;
       width: 100%;
       border-radius: 15px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.3);
       padding: 40px 50px;
       color: #111;
+      position: relative;
+      z-index: 1;
       transition: box-shadow 0.3s ease;
     }
     main:hover {
       box-shadow: 0 20px 50px rgba(0,0,0,0.4);
     }
 
-    /* Хедер */
     header {
       text-align: center;
       margin-bottom: 50px;
       width: 100%;
       max-width: 900px;
-      color: #f0a500;
+      color: #3db4d9;
       user-select: none;
+      position: relative;
+      z-index: 1;
     }
 
     header img {
       width: 120px;
       animation: fadeInRotate 3s ease forwards;
       margin-bottom: 15px;
-      filter: drop-shadow(0 0 5px #f0a500aa);
+      filter: drop-shadow(0 0 8px #3db4d9aa);
+      transition: transform 0.3s ease;
+    }
+    header img:hover {
+      transform: scale(1.1) rotate(10deg);
+      filter: drop-shadow(0 0 15px #3db4d9cc);
     }
 
     @keyframes fadeInRotate {
@@ -67,24 +101,23 @@
     header h1 {
       font-weight: 700;
       font-size: 3rem;
-      text-shadow: 0 0 8px #f0a500;
+      text-shadow: 0 0 10px #3db4d9aa;
       margin: 0;
     }
 
-    /* Секції */
     section {
       margin-bottom: 40px;
       padding-bottom: 15px;
-      border-bottom: 2px solid #f0a500;
+      border-bottom: 2px solid #3db4d9;
     }
 
     h2 {
-      color: #f0a500;
+      color: #3db4d9;
       font-weight: 700;
       font-size: 2rem;
       margin-bottom: 15px;
       letter-spacing: 1px;
-      text-shadow: 0 0 5px #f0a500aa;
+      text-shadow: 0 0 5px #3db4d9aa;
     }
 
     p {
@@ -105,14 +138,13 @@
       transition: color 0.3s ease;
     }
     ul li:hover {
-      color: #f0a500;
+      color: #3db4d9;
       cursor: default;
     }
 
-    /* Стилі для коду */
     code {
-      background: #f0a500;
-      color: #1a1a1a;
+      background: #3db4d9;
+      color: #fff;
       padding: 3px 7px;
       border-radius: 5px;
       font-family: 'Courier New', Courier, monospace;
@@ -121,37 +153,37 @@
     }
 
     pre {
-      background: #222;
-      color: #f0a500;
+      background: #0a1a2a;
+      color: #3db4d9;
       padding: 20px;
       border-radius: 12px;
       overflow-x: auto;
       font-family: 'Courier New', Courier, monospace;
-      box-shadow: inset 0 0 20px #f0a500aa;
+      box-shadow: inset 0 0 20px #3db4d9aa;
       font-size: 1rem;
       line-height: 1.4;
       user-select: text;
     }
 
-    /* Футер */
     footer {
       margin-top: 40px;
-      color: #888;
+      color: #a1cbe6;
       font-size: 0.9rem;
       user-select: none;
+      position: relative;
+      z-index: 1;
     }
 
     a {
-      color: #f0a500;
+      color: #3db4d9;
       text-decoration: none;
       transition: text-shadow 0.3s ease;
     }
     a:hover {
       text-decoration: underline;
-      text-shadow: 0 0 5px #f0a500;
+      text-shadow: 0 0 6px #3db4d9;
     }
 
-    /* Адаптивність */
     @media (max-width: 600px) {
       main {
         padding: 25px 20px;
@@ -223,7 +255,6 @@ fi
 </code></pre>
       <p><em>Цей простий скрипт демонструє базову перевірку логіна і пароля у текстовому режимі.</em></p>
     </section>
-
     <section id="sources">
       <h2>Джерела інформації по темі</h2>
       <ul>
