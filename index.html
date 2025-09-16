@@ -17,9 +17,8 @@
       overflow-x: hidden;
     }
 
-    /* Фоновий пінгвін */
-    body::before {
-      content: "";
+    /* Пінгвін на фоні */
+    #penguin-bg {
       position: fixed;
       top: 50%;
       left: 50%;
@@ -35,17 +34,12 @@
       z-index: 0;
     }
 
-    main section:hover ~ body::before,
-    main section:focus-within ~ body::before {
-      /* Це не спрацює, тому будемо керувати через JS */
-    }
-
     header {
       background-color: #f8f8f8;
       padding: 20px 0;
       text-align: center;
       position: relative;
-      z-index: 2;
+      z-index: 10;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
@@ -68,7 +62,7 @@
       margin: 30px auto 60px;
       padding: 0 20px;
       position: relative;
-      z-index: 2;
+      z-index: 10;
     }
 
     section {
@@ -128,7 +122,7 @@
       border-top: 1px solid #ddd;
       background: #fafafa;
       position: relative;
-      z-index: 2;
+      z-index: 10;
     }
 
     a {
@@ -139,6 +133,54 @@
     a:hover, a:focus {
       text-decoration: underline;
     }
+
+    /* Коди по боках */
+    .code-column {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      background: #f7f7f7;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+      font-family: monospace;
+      font-size: 12px;
+      line-height: 1.3;
+      padding: 20px 10px;
+      overflow: hidden;
+      z-index: 5;
+      user-select: none;
+      color: #222;
+    }
+
+    #left-code {
+      left: 0;
+      border-right: 1px solid #ddd;
+    }
+
+    #right-code {
+      right: 0;
+      border-left: 1px solid #ddd;
+    }
+
+    /* Анімація рядків */
+    .code-scroll {
+      display: block;
+      animation: scrollCode 20s linear infinite;
+      white-space: nowrap;
+    }
+
+    #right-code .code-scroll {
+      animation-direction: reverse;
+    }
+
+    @keyframes scrollCode {
+      0% {
+        transform: translateY(100%);
+      }
+      100% {
+        transform: translateY(-100%);
+      }
+    }
   </style>
 </head>
 <body>
@@ -147,7 +189,7 @@
     <h1>Операційна система Linux</h1>
   </header>
 
-  <main>
+  <main id="main-content" tabindex="0">
     <section id="info" tabindex="0">
       <h2>Коротка інформація про ОС GNU/Linux</h2>
       <p>
@@ -214,64 +256,85 @@ fi
     &copy; 2025 Ремезовський Борис — Веб-сторінка про Linux
   </footer>
 
+  <!-- Пінгвін фон -->
+  <div id="penguin-bg"></div>
+
+  <!-- Колонки з кодом -->
+  <div id="left-code" class="code-column" aria-hidden="true">
+    <span class="code-scroll">
+      #!/bin/bash<br>
+      echo "Привіт, Linux!"<br>
+      ls -la<br>
+      mkdir new_folder<br>
+      cd new_folder<br>
+      touch file.txt<br>
+      cp file.txt backup.txt<br>
+      mv backup.txt ../<br>
+      rm file.txt<br>
+      history<br>
+      echo "Готово!"<br>
+      #!/bin/bash<br>
+      echo "Привіт, Linux!"<br>
+      ls -la<br>
+      mkdir new_folder<br>
+      cd new_folder<br>
+      touch file.txt<br>
+      cp file.txt backup.txt<br>
+      mv backup.txt ../<br>
+      rm file.txt<br>
+      history<br>
+      echo "Готово!"<br>
+    </span>
+  </div>
+
+  <div id="right-code" class="code-column" aria-hidden="true">
+    <span class="code-scroll">
+      history<br>
+      rm file.txt<br>
+      mv backup.txt ../<br>
+      cp file.txt backup.txt<br>
+      touch file.txt<br>
+      cd new_folder<br>
+      mkdir new_folder<br>
+      ls -la<br>
+      echo "Привіт, Linux!"<br>
+      #!/bin/bash<br>
+      history<br>
+      rm file.txt<br>
+      mv backup.txt ../<br>
+      cp file.txt backup.txt<br>
+      touch file.txt<br>
+      cd new_folder<br>
+      mkdir new_folder<br>
+      ls -la<br>
+      echo "Привіт, Linux!"<br>
+      #!/bin/bash<br>
+    </span>
+  </div>
+
   <script>
-    const body = document.body;
-    const penguin = document.createElement('style');
-    let active = false;
+    const penguinBg = document.getElementById('penguin-bg');
+    const mainContent = document.getElementById('main-content');
 
-    // Замінимо стиль body::before через JS щоб керувати пінгвіном
-    // Так як псевдоелементи неможливо безпосередньо змінити JS, будемо створювати div з фоном
-
-    const penguinDiv = document.createElement('div');
-    penguinDiv.style.position = 'fixed';
-    penguinDiv.style.top = '50%';
-    penguinDiv.style.left = '50%';
-    penguinDiv.style.width = '500px';
-    penguinDiv.style.height = '500px';
-    penguinDiv.style.backgroundImage = "url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/512px-Tux.svg.png')";
-    penguinDiv.style.backgroundRepeat = 'no-repeat';
-    penguinDiv.style.backgroundPosition = 'center center';
-    penguinDiv.style.backgroundSize = 'contain';
-    penguinDiv.style.filter = 'blur(15px) brightness(0.5)';
-    penguinDiv.style.opacity = '0.25';
-    penguinDiv.style.transform = 'translate(-50%, -50%) scale(1)';
-    penguinDiv.style.transition = 'transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease';
-    penguinDiv.style.pointerEvents = 'none';
-    penguinDiv.style.zIndex = '0';
-
-    document.body.appendChild(penguinDiv);
-
-    // Функція для збільшення пінгвіна
     function activatePenguin() {
-      penguinDiv.style.transform = 'translate(-50%, -50%) scale(1.15)';
-      penguinDiv.style.filter = 'blur(5px) brightness(0.9)';
-      penguinDiv.style.opacity = '0.45';
+      penguinBg.style.transform = 'translate(-50%, -50%) scale(1.15)';
+      penguinBg.style.filter = 'blur(5px) brightness(0.9)';
+      penguinBg.style.opacity = '0.45';
     }
 
-    // Функція для зменшення пінгвіна
     function deactivatePenguin() {
-      penguinDiv.style.transform = 'translate(-50%, -50%) scale(1)';
-      penguinDiv.style.filter = 'blur(15px) brightness(0.5)';
-      penguinDiv.style.opacity = '0.25';
+      penguinBg.style.transform = 'translate(-50%, -50%) scale(1)';
+      penguinBg.style.filter = 'blur(15px) brightness(0.5)';
+      penguinBg.style.opacity = '0.25';
     }
 
-    // Додаємо події для кожної секції
-    const sections = document.querySelectorAll('main section');
-    sections.forEach(section => {
-      section.addEventListener('mouseenter', () => {
-        activatePenguin();
-      });
-      section.addEventListener('mouseleave', () => {
-        deactivatePenguin();
-      });
-      // Для доступності: при фокусі (напр. клавіша Tab)
-      section.addEventListener('focusin', () => {
-        activatePenguin();
-      });
-      section.addEventListener('focusout', () => {
-        deactivatePenguin();
-      });
-    });
+    // Пінгвін реагує лише на main
+    mainContent.addEventListener('mouseenter', activatePenguin);
+    mainContent.addEventListener('mouseleave', deactivatePenguin);
+
+    // Для доступності - фокус клавіатурою
+    mainContent.addEventListener('focusin', activatePenguin);
+    mainContent.addEventListener('focusout', deactivatePenguin);
   </script>
 </body>
 </html>
