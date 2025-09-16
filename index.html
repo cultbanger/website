@@ -1,92 +1,182 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Курс Git</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
-<style>
-  *{box-sizing:border-box;margin:0;padding:0;font-family:Montserrat,sans-serif;}
-  body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    padding:40px;
-    background: linear-gradient(-45deg, #0f0f0f, #1c1c1c, #2a2a2a, #111111);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    color:white;
-  }
-  @keyframes gradientBG{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-  }
-  .container{
-    max-width:1000px;
-    width:100%;
-    background: rgba(0,0,0,0.7);
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 10px 40px rgba(0,0,0,0.8);
-  }
-  h1,h2{margin-bottom:20px;}
-  h1{font-size:3rem;text-align:center;color:#fff;}
-  h2{font-size:1.8rem;color:#fff;}
-  p,li{font-size:1rem;line-height:1.6;color:#ccc;}
-  ul{margin-left:20px;margin-bottom:20px;}
-  .command{background:#111;padding:10px 15px;margin-bottom:10px;border-radius:8px;font-family:monospace;}
-  .certificate{
-    margin-top:30px;
-    text-align:center;
-    padding:20px;
-    background:#222;
-    border:2px solid #444;
-    border-radius:10px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.7);
-  }
-  .sources{margin-top:30px;}
-  a{color:#1e90ff;text-decoration:none;}
-  a:hover{text-decoration:underline;}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux — Опрацювання теми</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #1e1e2f;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #333;
+      padding: 20px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header img {
+      width: 100px;
+      opacity: 0;
+      animation: fadeInLogo 2s forwards;
+    }
+
+    @keyframes fadeInLogo {
+      to {
+        opacity: 1;
+      }
+    }
+
+    header h1 {
+      margin: 15px 0 0 0;
+      font-weight: 700;
+      font-size: 2.5rem;
+      color: #f0a500;
+      text-shadow: 0 0 10px #f0a500;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      background: #2c2c44;
+      border-radius: 10px;
+      padding: 25px 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 15px #0008;
+      transition: transform 0.3s ease;
+    }
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px #f0a500aa;
+    }
+
+    h2 {
+      color: #f0a500;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #f0a500;
+      padding-bottom: 5px;
+    }
+
+    ul {
+      list-style-type: square;
+      padding-left: 20px;
+    }
+
+    code {
+      background: #444466;
+      color: #f0a500;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    pre {
+      background: #111126;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      box-shadow: inset 0 0 8px #000a;
+    }
+
+    footer {
+      text-align: center;
+      color: #777;
+      padding: 20px 0;
+      font-size: 0.9rem;
+    }
+
+    a {
+      color: #f0a500;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-  <h1>Курс Git</h1>
-  <h2>Коротка інформація про системи контролю версій та Git</h2>
-  <p>Системи контролю версій (Version Control Systems, VCS) дозволяють відстежувати зміни у файлах, координувати роботу команд та зберігати історію проекту. Git — це розподілена система контролю версій, що надає потужні інструменти для роботи з кодом, зберігання змін та кооперації у команді.</p>
-  <h2>Основні можливості та переваги Git</h2>
-  <ul>
-    <li>Розподілена структура — кожен користувач має повну копію репозиторію.</li>
-    <li>Висока швидкість роботи.</li>
-    <li>Легке створення та злиття гілок (branching & merging).</li>
-    <li>Можливість відстежувати історію змін та відкотитися до попередніх станів.</li>
-    <li>Підтримка роботи у команді через віддалені репозиторії.</li>
-  </ul>
-  <h2>10 базових команд Git з коментарями</h2>
-  <div class="command">git init  —  створити новий Git репозиторій</div>
-  <div class="command">git clone &lt;url&gt;  —  скопіювати існуючий репозиторій</div>
-  <div class="command">git status  —  показати стан репозиторію</div>
-  <div class="command">git add &lt;file&gt;  —  додати файл до staging area</div>
-  <div class="command">git commit -m "message"  —  зафіксувати зміни з коментарем</div>
-  <div class="command">git push  —  відправити зміни на віддалений репозиторій</div>
-  <div class="command">git pull  —  отримати та об'єднати зміни з віддаленого репозиторію</div>
-  <div class="command">git branch  —  показати або створити гілки</div>
-  <div class="command">git checkout &lt;branch&gt;  —  перейти на іншу гілку</div>
-  <div class="command">git merge &lt;branch&gt;  —  об'єднати гілку з поточною</div>
-  <div class="certificate">
-    <h2>Сертифікат курсу по Git</h2>
-    <p>Ви успішно завершили курс по Git і опанували базові навички роботи з системою контролю версій.</p>
-  </div>
-  <div class="sources">
-    <h2>Джерела інформації</h2>
-    <ul>
-      <li><a href="https://git-scm.com/book/uk/v2" target="_blank">Pro Git Book</a></li>
-      <li><a href="https://git-scm.com/" target="_blank">Офіційний сайт Git</a></li>
-      <li><a href="https://www.atlassian.com/git" target="_blank">Atlassian Git Tutorials</a></li>
-    </ul>
-  </div>
-</div>
+  <header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/120px-Tux.svg.png" alt="Linux Tux Logo" />
+    <h1>Операційна система Linux</h1>
+  </header>
+
+  <main>
+    <section id="info">
+      <h2>Коротка інформація про ОС GNU/Linux</h2>
+      <p>
+        Linux — це вільна операційна система з відкритим кодом, розроблена Лінусом Торвальдсом у 1991 році. Вона базується на Unix і використовується на серверах, робочих станціях, мобільних пристроях та вбудованих системах.
+      </p>
+    </section>
+
+    <section id="distros">
+      <h2>Найпопулярніші дистрибутиви Linux</h2>
+      <ul>
+        <li>Ubuntu</li>
+        <li>Debian</li>
+        <li>Fedora</li>
+        <li>CentOS</li>
+        <li>openSUSE</li>
+        <li>Arch Linux</li>
+      </ul>
+    </section>
+
+    <section id="commands">
+      <h2>Приклади команд роботи в Linux CLI</h2>
+      <ul>
+        <li><code>pwd</code> — показати поточний каталог</li>
+        <li><code>echo</code> — вивести текст або змінну</li>
+        <li><code>ls</code> — показати список файлів</li>
+        <li><code>cd</code> — змінити каталог</li>
+        <li><code>touch</code> — створити порожній файл</li>
+        <li><code>mkdir</code> — створити каталог</li>
+        <li><code>cp</code> — копіювати файли і каталоги</li>
+        <li><code>mv</code> — переміщувати або перейменовувати файли</li>
+        <li><code>rm</code> — видаляти файли і каталоги</li>
+        <li><code>history</code> — показати історію команд</li>
+      </ul>
+    </section>
+
+    <section id="bash-script">
+      <h2>BASH-скрипт, що імітує авторизацію в системі</h2>
+      <pre><code>#!/bin/bash
+echo "Введіть логін:"
+read user
+echo "Введіть пароль:"
+read -s pass
+if [[ "$user" == "admin" && "$pass" == "linux123" ]]; then
+  echo "Авторизація успішна! Ласкаво просимо, $user."
+else
+  echo "Невірний логін або пароль."
+fi
+</code></pre>
+      <p><em>Цей простий скрипт демонструє базову перевірку логіна і пароля у текстовому режимі.</em></p>
+    </section>
+
+    <section id="sources">
+      <h2>Джерела інформації по темі</h2>
+      <ul>
+        <li><a href="https://www.kernel.org/" target="_blank" rel="noopener">Kernel.org — офіційний сайт ядра Linux</a></li>
+        <li><a href="https://www.linux.org/" target="_blank" rel="noopener">Linux.org — спільнота Linux</a></li>
+        <li><a href="https://ubuntu.com/" target="_blank" rel="noopener">Ubuntu — популярний дистрибутив Linux</a></li>
+        <li><a href="https://linuxcommand.org/" target="_blank" rel="noopener">LinuxCommand.org — навчання роботі з CLI</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Ремезовський Борис — Веб-сторінка про Linux
+  </footer>
 </body>
 </html>
