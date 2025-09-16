@@ -5,157 +5,139 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Linux — Опрацювання теми</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
-    /* Основний білий фон і чорний текст */
     body {
       margin: 0;
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Inter', sans-serif;
       background: #fff;
       color: #000;
       line-height: 1.6;
       position: relative;
-      min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* Великий пінгвін на задньому плані */
+    /* Фоновий пінгвін */
     body::before {
       content: "";
       position: fixed;
       top: 50%;
       left: 50%;
-      width: 600px;
-      height: 600px;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/1024px-Tux.svg.png') no-repeat center center;
+      width: 500px;
+      height: 500px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/512px-Tux.svg.png') no-repeat center center;
       background-size: contain;
-      filter: grayscale(100%) brightness(80%) blur(6px);
-      opacity: 0.12;
+      filter: blur(15px) brightness(0.5);
+      opacity: 0.25;
       transform: translate(-50%, -50%) scale(1);
-      transition: filter 0.4s ease, transform 0.4s ease, opacity 0.4s ease;
-      z-index: 0;
+      transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;
       pointer-events: none;
-      user-select: none;
+      z-index: 0;
     }
 
-    /* При наведенні на сторінку — пінгвін стає більшим і чіткішим */
-    body:hover::before, body:focus-within::before {
-      filter: grayscale(100%) brightness(100%) blur(0);
-      opacity: 0.3;
-      transform: translate(-50%, -50%) scale(1.4);
+    main section:hover ~ body::before,
+    main section:focus-within ~ body::before {
+      /* Це не спрацює, тому будемо керувати через JS */
     }
 
     header {
-      background-color: #fff;
+      background-color: #f8f8f8;
       padding: 20px 0;
       text-align: center;
       position: relative;
-      z-index: 10;
-      border-bottom: 2px solid #eee;
+      z-index: 2;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     header img {
       width: 100px;
-      opacity: 0;
-      animation: fadeInLogo 2s forwards;
-      filter: grayscale(100%);
-      transition: filter 0.3s ease;
-    }
-
-    header img:hover {
-      filter: grayscale(0%);
-    }
-
-    @keyframes fadeInLogo {
-      to {
-        opacity: 1;
-      }
+      opacity: 0.9;
+      transition: opacity 0.5s ease;
     }
 
     header h1 {
       margin: 15px 0 0 0;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 2.5rem;
-      color: #000;
-      text-shadow: none;
+      color: #222;
+      letter-spacing: 1px;
     }
 
     main {
       max-width: 900px;
-      margin: 30px auto;
-      padding: 0 20px 40px;
+      margin: 30px auto 60px;
+      padding: 0 20px;
       position: relative;
-      z-index: 10;
+      z-index: 2;
     }
 
     section {
       background: #fff;
       border-radius: 12px;
-      padding: 25px 30px;
+      padding: 30px 35px;
       margin-bottom: 30px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      cursor: default;
     }
-
-    section:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    section:hover, section:focus-within {
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transform: translateY(-5px);
     }
 
     h2 {
-      color: #000;
+      color: #111;
       margin-bottom: 15px;
-      border-bottom: 2px solid #ddd;
+      border-bottom: 3px solid #222;
       padding-bottom: 8px;
-      font-weight: 700;
+      font-weight: 600;
     }
 
     ul {
-      list-style-type: square;
-      padding-left: 20px;
+      list-style-type: disc;
+      padding-left: 25px;
       color: #222;
     }
 
-    a {
-      color: #0066cc;
-      text-decoration: none;
-      border-bottom: 1px dotted #0066cc;
-      transition: color 0.3s ease;
-    }
-    a:hover {
-      color: #004a99;
-      border-bottom: 1px solid #004a99;
-    }
-
     code {
-      background: #f4f4f4;
+      background: #f0f0f0;
       color: #333;
       padding: 3px 7px;
       border-radius: 5px;
-      font-family: monospace;
+      font-family: 'Courier New', Courier, monospace;
       font-weight: 500;
     }
 
     pre {
-      background: #f9f9f9;
-      padding: 20px;
-      border-radius: 12px;
+      background: #eee;
+      padding: 18px;
+      border-radius: 10px;
       overflow-x: auto;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+      box-shadow: inset 0 0 10px #ddd;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 500;
       color: #222;
-      font-size: 1rem;
-      line-height: 1.4;
-      font-family: monospace;
     }
 
     footer {
       text-align: center;
       color: #555;
       padding: 25px 0;
-      font-size: 0.9rem;
+      font-size: 1rem;
+      font-weight: 400;
+      border-top: 1px solid #ddd;
+      background: #fafafa;
       position: relative;
-      z-index: 10;
-      border-top: 1px solid #eee;
+      z-index: 2;
+    }
+
+    a {
+      color: #0073e6;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a:hover, a:focus {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -166,14 +148,14 @@
   </header>
 
   <main>
-    <section id="info">
+    <section id="info" tabindex="0">
       <h2>Коротка інформація про ОС GNU/Linux</h2>
       <p>
         Linux — це вільна операційна система з відкритим кодом, розроблена Лінусом Торвальдсом у 1991 році. Вона базується на Unix і використовується на серверах, робочих станціях, мобільних пристроях та вбудованих системах.
       </p>
     </section>
 
-    <section id="distros">
+    <section id="distros" tabindex="0">
       <h2>Найпопулярніші дистрибутиви Linux</h2>
       <ul>
         <li>Ubuntu</li>
@@ -185,7 +167,7 @@
       </ul>
     </section>
 
-    <section id="commands">
+    <section id="commands" tabindex="0">
       <h2>Приклади команд роботи в Linux CLI</h2>
       <ul>
         <li><code>pwd</code> — показати поточний каталог</li>
@@ -201,7 +183,7 @@
       </ul>
     </section>
 
-    <section id="bash-script">
+    <section id="bash-script" tabindex="0">
       <h2>BASH-скрипт, що імітує авторизацію в системі</h2>
       <pre><code>#!/bin/bash
 echo "Введіть логін:"
@@ -217,7 +199,7 @@ fi
       <p><em>Цей простий скрипт демонструє базову перевірку логіна і пароля у текстовому режимі.</em></p>
     </section>
 
-    <section id="sources">
+    <section id="sources" tabindex="0">
       <h2>Джерела інформації по темі</h2>
       <ul>
         <li><a href="https://www.kernel.org/" target="_blank" rel="noopener">Kernel.org — офіційний сайт ядра Linux</a></li>
@@ -231,5 +213,65 @@ fi
   <footer>
     &copy; 2025 Ремезовський Борис — Веб-сторінка про Linux
   </footer>
+
+  <script>
+    const body = document.body;
+    const penguin = document.createElement('style');
+    let active = false;
+
+    // Замінимо стиль body::before через JS щоб керувати пінгвіном
+    // Так як псевдоелементи неможливо безпосередньо змінити JS, будемо створювати div з фоном
+
+    const penguinDiv = document.createElement('div');
+    penguinDiv.style.position = 'fixed';
+    penguinDiv.style.top = '50%';
+    penguinDiv.style.left = '50%';
+    penguinDiv.style.width = '500px';
+    penguinDiv.style.height = '500px';
+    penguinDiv.style.backgroundImage = "url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/512px-Tux.svg.png')";
+    penguinDiv.style.backgroundRepeat = 'no-repeat';
+    penguinDiv.style.backgroundPosition = 'center center';
+    penguinDiv.style.backgroundSize = 'contain';
+    penguinDiv.style.filter = 'blur(15px) brightness(0.5)';
+    penguinDiv.style.opacity = '0.25';
+    penguinDiv.style.transform = 'translate(-50%, -50%) scale(1)';
+    penguinDiv.style.transition = 'transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease';
+    penguinDiv.style.pointerEvents = 'none';
+    penguinDiv.style.zIndex = '0';
+
+    document.body.appendChild(penguinDiv);
+
+    // Функція для збільшення пінгвіна
+    function activatePenguin() {
+      penguinDiv.style.transform = 'translate(-50%, -50%) scale(1.15)';
+      penguinDiv.style.filter = 'blur(5px) brightness(0.9)';
+      penguinDiv.style.opacity = '0.45';
+    }
+
+    // Функція для зменшення пінгвіна
+    function deactivatePenguin() {
+      penguinDiv.style.transform = 'translate(-50%, -50%) scale(1)';
+      penguinDiv.style.filter = 'blur(15px) brightness(0.5)';
+      penguinDiv.style.opacity = '0.25';
+    }
+
+    // Додаємо події для кожної секції
+    const sections = document.querySelectorAll('main section');
+    sections.forEach(section => {
+      section.addEventListener('mouseenter', () => {
+        activatePenguin();
+      });
+      section.addEventListener('mouseleave', () => {
+        deactivatePenguin();
+      });
+      // Для доступності: при фокусі (напр. клавіша Tab)
+      section.addEventListener('focusin', () => {
+        activatePenguin();
+      });
+      section.addEventListener('focusout', () => {
+        deactivatePenguin();
+      });
+    });
+  </script>
 </body>
 </html>
