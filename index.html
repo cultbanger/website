@@ -5,61 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Linux — Опрацювання теми</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
       background: #fff;
       color: #000;
+      font-family: 'Fira Code', monospace;
       line-height: 1.6;
-      position: relative;
       overflow-x: hidden;
     }
 
-    /* Пінгвін на фоні */
-    #penguin-bg {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 500px;
-      height: 500px;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/512px-Tux.svg.png') no-repeat center center;
-      background-size: contain;
-      filter: blur(15px) brightness(0.5);
-      opacity: 0.25;
-      transform: translate(-50%, -50%) scale(1);
-      transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;
-      pointer-events: none;
-      z-index: 0;
-    }
-
     header {
-      background-color: #f8f8f8;
+      background: #f5f5f5;
       padding: 20px 0;
       text-align: center;
-      position: relative;
-      z-index: 10;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    header img {
-      width: 100px;
-      opacity: 0.9;
-      transition: opacity 0.5s ease;
+      z-index: 10;
+      position: relative;
     }
 
     header h1 {
-      margin: 15px 0 0 0;
-      font-weight: 600;
+      margin: 0;
       font-size: 2.5rem;
-      color: #222;
-      letter-spacing: 1px;
+      font-weight: 700;
     }
 
     main {
       max-width: 900px;
-      margin: 30px auto 60px;
+      margin: 30px auto;
       padding: 0 20px;
       position: relative;
       z-index: 10;
@@ -67,137 +41,126 @@
 
     section {
       background: #fff;
-      border-radius: 12px;
-      padding: 30px 35px;
+      padding: 25px 30px;
       margin-bottom: 30px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-      cursor: default;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease;
     }
-    section:hover, section:focus-within {
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      transform: translateY(-5px);
+
+    section:hover {
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.3);
     }
 
     h2 {
-      color: #111;
+      border-bottom: 2px solid #000;
+      padding-bottom: 5px;
       margin-bottom: 15px;
-      border-bottom: 3px solid #222;
-      padding-bottom: 8px;
-      font-weight: 600;
     }
 
     ul {
-      list-style-type: disc;
-      padding-left: 25px;
-      color: #222;
+      list-style-type: square;
+      padding-left: 20px;
     }
 
     code {
-      background: #f0f0f0;
-      color: #333;
-      padding: 3px 7px;
-      border-radius: 5px;
-      font-family: 'Courier New', Courier, monospace;
-      font-weight: 500;
+      background: #eee;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Fira Code', monospace;
     }
 
     pre {
-      background: #eee;
-      padding: 18px;
-      border-radius: 10px;
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 8px;
       overflow-x: auto;
-      box-shadow: inset 0 0 10px #ddd;
-      font-family: 'Courier New', Courier, monospace;
-      font-weight: 500;
-      color: #222;
+      font-family: 'Fira Code', monospace;
     }
 
     footer {
       text-align: center;
-      color: #555;
-      padding: 25px 0;
-      font-size: 1rem;
-      font-weight: 400;
-      border-top: 1px solid #ddd;
-      background: #fafafa;
-      position: relative;
-      z-index: 10;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
     }
 
     a {
-      color: #0073e6;
+      color: #000;
+      font-weight: bold;
       text-decoration: none;
-      font-weight: 600;
     }
-    a:hover, a:focus {
+
+    a:hover {
       text-decoration: underline;
     }
 
-    /* Коди по боках */
-    .code-column {
+    /* Tux background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 800px;
+      height: 800px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg') no-repeat center;
+      background-size: contain;
+      opacity: 0.05;
+      transform: translate(-50%, -50%) scale(1);
+      transition: all 0.6s ease;
+      z-index: 1;
+      filter: blur(12px);
+      pointer-events: none;
+    }
+
+    main:hover ~ body::before {
+      opacity: 0.2;
+      filter: blur(2px);
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    /* Bash Matrix effect */
+    #matrix-container {
       position: fixed;
       top: 0;
-      bottom: 0;
-      width: 120px;
-      background: #f7f7f7;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-      font-family: monospace;
-      font-size: 12px;
-      line-height: 1.3;
-      padding: 20px 10px;
-      overflow: hidden;
-      z-index: 5;
-      user-select: none;
-      color: #222;
-    }
-
-    #left-code {
       left: 0;
-      border-right: 1px solid #ddd;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 2;
+      overflow: hidden;
     }
 
-    #right-code {
-      right: 0;
-      border-left: 1px solid #ddd;
-    }
-
-    /* Анімація рядків */
-    .code-scroll {
-      display: block;
-      animation: scrollCode 20s linear infinite;
+    .matrix-line {
+      position: absolute;
       white-space: nowrap;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.05);
+      animation: moveMatrix 15s linear infinite;
     }
 
-    #right-code .code-scroll {
-      animation-direction: reverse;
-    }
-
-    @keyframes scrollCode {
-      0% {
-        transform: translateY(100%);
-      }
-      100% {
-        transform: translateY(-100%);
-      }
+    @keyframes moveMatrix {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100vw); }
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/120px-Tux.svg.png" alt="Linux Tux Logo" />
     <h1>Операційна система Linux</h1>
   </header>
 
-  <main id="main-content" tabindex="0">
-    <section id="info" tabindex="0">
+  <div id="matrix-container"></div>
+
+  <main>
+    <section id="info">
       <h2>Коротка інформація про ОС GNU/Linux</h2>
       <p>
-        Linux — це вільна операційна система з відкритим кодом, розроблена Лінусом Торвальдсом у 1991 році. Вона базується на Unix і використовується на серверах, робочих станціях, мобільних пристроях та вбудованих системах.
+        Linux — це вільна операційна система з відкритим кодом, створена Лінусом Торвальдсом у 1991 році. Вона базується на архітектурі Unix і широко використовується на серверах, комп’ютерах, мобільних пристроях і вбудованих системах.
       </p>
     </section>
 
-    <section id="distros" tabindex="0">
+    <section id="distros">
       <h2>Найпопулярніші дистрибутиви Linux</h2>
       <ul>
         <li>Ubuntu</li>
@@ -209,132 +172,70 @@
       </ul>
     </section>
 
-    <section id="commands" tabindex="0">
+    <section id="commands">
       <h2>Приклади команд роботи в Linux CLI</h2>
       <ul>
         <li><code>pwd</code> — показати поточний каталог</li>
-        <li><code>echo</code> — вивести текст або змінну</li>
-        <li><code>ls</code> — показати список файлів</li>
+        <li><code>echo</code> — вивести текст</li>
+        <li><code>ls</code> — список файлів</li>
         <li><code>cd</code> — змінити каталог</li>
-        <li><code>touch</code> — створити порожній файл</li>
+        <li><code>touch</code> — створити файл</li>
         <li><code>mkdir</code> — створити каталог</li>
-        <li><code>cp</code> — копіювати файли і каталоги</li>
-        <li><code>mv</code> — переміщувати або перейменовувати файли</li>
-        <li><code>rm</code> — видаляти файли і каталоги</li>
-        <li><code>history</code> — показати історію команд</li>
+        <li><code>cp</code> — копіювання</li>
+        <li><code>mv</code> — переміщення/перейменування</li>
+        <li><code>rm</code> — видалення</li>
+        <li><code>history</code> — історія команд</li>
       </ul>
     </section>
 
-    <section id="bash-script" tabindex="0">
-      <h2>BASH-скрипт, що імітує авторизацію в системі</h2>
+    <section id="bash-script">
+      <h2>BASH-скрипт, що імітує авторизацію</h2>
       <pre><code>#!/bin/bash
 echo "Введіть логін:"
 read user
 echo "Введіть пароль:"
 read -s pass
 if [[ "$user" == "admin" && "$pass" == "linux123" ]]; then
-  echo "Авторизація успішна! Ласкаво просимо, $user."
+  echo "Авторизація успішна! Вітаємо, $user."
 else
   echo "Невірний логін або пароль."
-fi
-</code></pre>
-      <p><em>Цей простий скрипт демонструє базову перевірку логіна і пароля у текстовому режимі.</em></p>
+fi</code></pre>
     </section>
 
-    <section id="sources" tabindex="0">
-      <h2>Джерела інформації по темі</h2>
+    <section id="sources">
+      <h2>Джерела інформації</h2>
       <ul>
-        <li><a href="https://www.kernel.org/" target="_blank" rel="noopener">Kernel.org — офіційний сайт ядра Linux</a></li>
-        <li><a href="https://www.linux.org/" target="_blank" rel="noopener">Linux.org — спільнота Linux</a></li>
-        <li><a href="https://ubuntu.com/" target="_blank" rel="noopener">Ubuntu — популярний дистрибутив Linux</a></li>
-        <li><a href="https://linuxcommand.org/" target="_blank" rel="noopener">LinuxCommand.org — навчання роботі з CLI</a></li>
+        <li><a href="https://www.kernel.org/">Kernel.org</a></li>
+        <li><a href="https://www.linux.org/">Linux.org</a></li>
+        <li><a href="https://ubuntu.com/">Ubuntu</a></li>
+        <li><a href="https://linuxcommand.org/">LinuxCommand.org</a></li>
       </ul>
     </section>
   </main>
 
   <footer>
-    &copy; 2025 Ремезовський Борис — Веб-сторінка про Linux
+    &copy; 2025 Ремезовський Борис — Linux Web
   </footer>
 
-  <!-- Пінгвін фон -->
-  <div id="penguin-bg"></div>
-
-  <!-- Колонки з кодом -->
-  <div id="left-code" class="code-column" aria-hidden="true">
-    <span class="code-scroll">
-      #!/bin/bash<br>
-      echo "Привіт, Linux!"<br>
-      ls -la<br>
-      mkdir new_folder<br>
-      cd new_folder<br>
-      touch file.txt<br>
-      cp file.txt backup.txt<br>
-      mv backup.txt ../<br>
-      rm file.txt<br>
-      history<br>
-      echo "Готово!"<br>
-      #!/bin/bash<br>
-      echo "Привіт, Linux!"<br>
-      ls -la<br>
-      mkdir new_folder<br>
-      cd new_folder<br>
-      touch file.txt<br>
-      cp file.txt backup.txt<br>
-      mv backup.txt ../<br>
-      rm file.txt<br>
-      history<br>
-      echo "Готово!"<br>
-    </span>
-  </div>
-
-  <div id="right-code" class="code-column" aria-hidden="true">
-    <span class="code-scroll">
-      history<br>
-      rm file.txt<br>
-      mv backup.txt ../<br>
-      cp file.txt backup.txt<br>
-      touch file.txt<br>
-      cd new_folder<br>
-      mkdir new_folder<br>
-      ls -la<br>
-      echo "Привіт, Linux!"<br>
-      #!/bin/bash<br>
-      history<br>
-      rm file.txt<br>
-      mv backup.txt ../<br>
-      cp file.txt backup.txt<br>
-      touch file.txt<br>
-      cd new_folder<br>
-      mkdir new_folder<br>
-      ls -la<br>
-      echo "Привіт, Linux!"<br>
-      #!/bin/bash<br>
-    </span>
-  </div>
-
   <script>
-    const penguinBg = document.getElementById('penguin-bg');
-    const mainContent = document.getElementById('main-content');
+    const matrixContainer = document.getElementById('matrix-container');
+    const commands = ['pwd', 'echo', 'ls', 'cd', 'touch', 'mkdir', 'cp', 'mv', 'rm', 'history'];
 
-    function activatePenguin() {
-      penguinBg.style.transform = 'translate(-50%, -50%) scale(1.15)';
-      penguinBg.style.filter = 'blur(5px) brightness(0.9)';
-      penguinBg.style.opacity = '0.45';
+    function createLine() {
+      const line = document.createElement('div');
+      line.className = 'matrix-line';
+      line.style.top = Math.random() * window.innerHeight + 'px';
+      line.style.left = '-100%';
+      line.style.fontSize = (Math.random() * 8 + 12) + 'px';
+      line.textContent = Array.from({ length: Math.floor(Math.random() * 5) + 3 }, () => commands[Math.floor(Math.random() * commands.length)]).join('   ');
+      matrixContainer.appendChild(line);
+
+      setTimeout(() => {
+        matrixContainer.removeChild(line);
+      }, 15000);
     }
 
-    function deactivatePenguin() {
-      penguinBg.style.transform = 'translate(-50%, -50%) scale(1)';
-      penguinBg.style.filter = 'blur(15px) brightness(0.5)';
-      penguinBg.style.opacity = '0.25';
-    }
-
-    // Пінгвін реагує лише на main
-    mainContent.addEventListener('mouseenter', activatePenguin);
-    mainContent.addEventListener('mouseleave', deactivatePenguin);
-
-    // Для доступності - фокус клавіатурою
-    mainContent.addEventListener('focusin', activatePenguin);
-    mainContent.addEventListener('focusout', deactivatePenguin);
+    setInterval(createLine, 500);
   </script>
 </body>
 </html>
